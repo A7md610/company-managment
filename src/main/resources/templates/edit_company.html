@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Company</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 50%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #333333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 48%;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 48%;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Company</h1>
+        <form th:action="@{/companies/{id}(id=${company.id})}" th:object="${company}" method="post">
+            <label for="name">Company Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></span>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" th:field="*{city}" />
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-message"></span>
+
+            <label for="employee">Employee Name:</label>
+            <input type="text" id="employee" name="employee" th:field="*{employee}" />
+            <span th:if="${#fields.hasErrors('employee')}" th:errors="*{employee}" class="error-message"></span>
+
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Update</button>
+                <a th:href="@{/companies/admin}" class="btn-back">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

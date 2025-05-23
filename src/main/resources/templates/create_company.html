@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create New Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 50%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #333333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add New Company</h1>
+
+        <!-- Success Message -->
+        <div
+            th:if="${successMessage}"
+            id="successMessage"
+            class="success-message"
+            th:text="${successMessage}">
+        </div>
+
+        <!-- Form -->
+        <form th:action="@{/companies/new}" th:object="${company}" method="post">
+            <label for="name">Company Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;"></span>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" th:field="*{city}" />
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" style="color: red;"></span>
+
+            <label for="employee">Employee Name:</label>
+            <input type="text" id="employee" name="employee" th:field="*{employee}" />
+            <span th:if="${#fields.hasErrors('employee')}" th:errors="*{employee}" style="color: red;"></span>
+
+            <button type="submit" class="btn-submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        // Automatically hide the success message after 3 seconds
+        window.onload = function () {
+            const successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.classList.add("hidden");
+                }, 3000); // 3 seconds
+            }
+        };
+    </script>
+</body>
+</html>
