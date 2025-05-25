@@ -25,10 +25,10 @@ public class Company {
         this.id = generateRandomId(); // Generate random ID on creation
     }
 
-    // Generate a 4-digit random ID
+    // Generate a 2-digit random ID
     private Long generateRandomId() {
         SecureRandom random = new SecureRandom();
-        return (long) (random.nextInt(9000) + 1000); // Generate a number between 1000 and 9999
+        return (long) (random.nextInt(90) + 10); // Generate a number between 10 and 99
     }
 
     // Getters and setters

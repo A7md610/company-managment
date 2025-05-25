@@ -43,4 +43,8 @@ public class CompanyService {
     public boolean existsById(Long id) {
         return companyRepository.existsById(id); // Returns true if company exists
     }
+
+    public List<Company> findByEmployee(String employee) {
+        return companyRepository.findByEmployeeIgnoreCase(employee);
+    }
 }

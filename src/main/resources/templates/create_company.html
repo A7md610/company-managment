@@ -101,12 +101,17 @@
     </div>
 
     <script>
-        // Automatically hide the success message after 3 seconds
+        // Automatically hide the success message after 3 seconds and remove the success parameter from the URL
         window.onload = function () {
             const successMessage = document.getElementById("successMessage");
             if (successMessage) {
                 setTimeout(() => {
                     successMessage.classList.add("hidden");
+
+                    // Remove the success=true parameter from the URL without refreshing the page
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete("success");
+                    window.history.replaceState({}, document.title, url.toString());
                 }, 3000); // 3 seconds
             }
         };
