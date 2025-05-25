@@ -50,9 +50,14 @@ public class CompanyViewController {
     // Show the edit company form
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Company company = companyService.getCompanyById(id);
-        model.addAttribute("company", company);
-        return "edit_company"; // Make sure edit_company.html exists
+        try {
+            Company company = companyService.getCompanyById(id);
+            model.addAttribute("company", company);
+            return "edit_company";
+        } catch (RuntimeException e) {
+            // Redirect to admin page with an error message (optional)
+            return "redirect:/companies/admin?error=notfound";
+        }
     }
 
     // Process the edit company form
@@ -69,7 +74,11 @@ public class CompanyViewController {
     // Delete a company
     @GetMapping("/delete/{id}")
     public String deleteCompany(@PathVariable Long id) {
-        companyService.deleteCompany(id);
+        try {
+            companyService.deleteCompany(id);
+        } catch (RuntimeException e) {
+            // Optionally, handle the error (e.g., log or redirect with error)
+        }
         return "redirect:/companies/admin";
     }
 
