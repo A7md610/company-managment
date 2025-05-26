@@ -9,18 +9,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
         body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #181a1b;
+            color: #f1f1f1;
             background-color: #f8f9fa;
             color: #212529;
             -webkit-tap-highlight-color: transparent;
         }
         .form-container {
+            background: rgba(40, 44, 52, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px 32px;
+            margin-top: 60px;
+            transition: background 0.3s, box-shadow 0.3s;
             max-width: 500px;
             margin: 20px auto;
             background-color: #fff;
-            padding: 20px 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
         @media (max-width: 576px) {
             .form-container {
@@ -33,11 +44,17 @@
             }
         }
         .form-control {
+            background: rgba(30, 34, 40, 0.8);
+            border: 1.5px solid #333;
+            color: #f1f1f1;
+            border-radius: 12px;
+            transition: border 0.2s, box-shadow 0.2s;
             font-size: 16px; /* Prevents zoom on iOS */
             padding: 0.75rem;
         }
         .form-label {
-            font-weight: 500;
+            font-weight: 600;
+            color: #bfc9d1;
             margin-bottom: 0.5rem;
         }
         .btn {
@@ -147,6 +164,35 @@
         .dark-mode .form-control:disabled, .dark-mode .form-control[readonly] {
             background-color: #23272b;
             color: #aaa;
+        }
+        .btn-success {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            border: none;
+            color: #181a1b;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px 0 rgba(67, 233, 123, 0.15);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-success:hover {
+            background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+            color: #181a1b;
+        }
+        .btn-secondary {
+            border-radius: 12px;
+        }
+        #darkModeToggle {
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-weight: 600;
+            background: #23272b;
+            color: #f1f1f1;
+            border: 1px solid #444;
+            transition: background 0.2s, color 0.2s;
+        }
+        #darkModeToggle:hover {
+            background: #4f8cff;
+            color: #fff;
         }
     </style>
 </head>
