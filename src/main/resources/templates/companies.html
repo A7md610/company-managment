@@ -6,79 +6,161 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
         body {
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-        .dark-mode {
-            background-color: #181a1b !important;
-            color: #f1f1f1 !important;
-        }
-        .dark-mode .table,
-        .dark-mode .table th,
-        .dark-mode .table td {
-            background-color: #23272b !important;
-            color: #f1f1f1 !important;
-        }
-        .dark-mode .btn {
-            color: #fff;
-        }
-        .dark-mode .btn-success {
-            background-color: #198754;
-            border-color: #198754;
-        }
-        .dark-mode .btn-secondary {
-            background-color: #444;
-            border-color: #444;
-        }
-        .dark-mode .btn-info {
-            background-color: #0dcaf0;
-            border-color: #0dcaf0;
-            color: #222;
-        }
-        .dark-mode .btn-close {
-            filter: invert(1);
-        }
-        .dark-mode .alert-success {
-            background-color: #1e4620;
-            color: #d1e7dd;
-        }
-        .dark-mode .alert-danger {
-            background-color: #58151c;
-            color: #f8d7da;
-        }
-        .dark-mode .card {
-            background-color: #23272b;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #181a1b;
             color: #f1f1f1;
         }
-        .dark-mode .form-control {
-            background-color: #23272b;
+        .container {
+            margin-top: 40px;
+        }
+        .form-label {
+            color: #bfc9d1;
+            font-weight: 600;
+        }
+        .form-control {
+            background: #23272b;
             color: #f1f1f1;
-            border-color: #444;
+            border: 1.5px solid #6c47ff;
+            border-radius: 10px;
+            transition: border 0.2s, box-shadow 0.2s;
         }
-        .dark-mode .form-control:focus {
-            background-color: #23272b;
+        .form-control:focus {
+            border-color: #a259ff;
+            box-shadow: 0 0 0 2px #a259ff44;
+            background: #23272b;
             color: #fff;
-        }
-        .dark-mode .form-control::placeholder {
-            color: #bbb;
-        }
-        .dark-mode .form-control:disabled, .dark-mode .form-control[readonly] {
-            background-color: #23272b;
-            color: #aaa;
         }
         .table-responsive {
             margin-top: 30px;
         }
-        .search-row {
-            margin-bottom: 20px;
+        .table {
+            background: rgba(35, 39, 43, 0.95);
+            color: #f1f1f1;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            background: rgba(35, 39, 43, 0.95);
+            color: #f1f1f1;
+            border: none;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #23272b;
+        }
+        .table-hover > tbody > tr:hover {
+            background-color: #2d2f36;
+        }
+        .card {
+            background: rgba(35, 39, 43, 0.95);
+            color: #f1f1f1;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(130, 90, 255, 0.15);
+            border: 1px solid rgba(130, 90, 255, 0.18);
         }
         .alert {
             width: 80%;
             margin: 20px auto 0 auto;
+            border-radius: 10px;
         }
-        .dark-mode .text-primary {
-            color: #fff !important;
+        .alert-success {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            color: #fff;
+            border: none;
+        }
+        .alert-danger {
+            background: #58151c;
+            color: #f8d7da;
+            border: none;
+        }
+        .btn-success {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px 0 rgba(130, 90, 255, 0.15);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-success:hover {
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #23272b;
+            color: #bfc9d1;
+            border-radius: 12px;
+            border: 1px solid #444;
+        }
+        .btn-secondary:hover {
+            background: #2d2f36;
+            color: #fff;
+        }
+        .btn-info {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 12px;
+        }
+        .btn-info:hover {
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
+        }
+        .btn-warning {
+            background: #a259ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+        }
+        .btn-warning:hover {
+            background: #6c47ff;
+            color: #fff;
+        }
+        .btn-danger {
+            background: #58151c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+        }
+        .btn-danger:hover {
+            background: #a259ff;
+            color: #fff;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        .dark-mode .text-primary, .text-primary {
+            color: #a259ff !important;
+            font-weight: 700;
+        }
+        .d-flex.flex-wrap.justify-content-center.gap-2.mb-4 {
+            gap: 1rem !important;
+        }
+        .btn-black {
+            background: #181a1b;
+            color: #fff;
+            border: 1.5px solid #23272b;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-black:hover {
+            background: #23272b;
+            color: #a259ff;
+        }
+        .btn-purple {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-purple:hover {
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
         }
     </style>
 </head>
@@ -110,20 +192,20 @@
                 <button type="submit" class="btn btn-info text-white" style="display: none;" id="uploadBtn">Upload</button>
             </form>
             <!-- Excel Download Button -->
-            <a th:href="@{/companies/download}" class="btn btn-secondary">Download Excel</a>
+            <a th:href="@{/companies/download}" class="btn btn-purple">Download Excel</a>
         </div>
 
         <div class="row search-row justify-content-center g-2 mb-3">
             <div class="col-12 col-md-4 mb-2 mb-md-0">
                 <div class="input-group">
                     <input type="text" id="company-id" class="form-control" placeholder="Enter Company ID">
-                    <button onclick="findCompanyById()" class="btn btn-primary">Find Company</button>
+                    <button onclick="findCompanyById()" class="btn btn-black">Find Company</button>
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <form th:action="@{/companies/search}" method="get" class="input-group">
                     <input type="text" name="employee" class="form-control" placeholder="Enter Employee Name" required>
-                    <button type="submit" class="btn btn-primary">Search by Employee</button>
+                    <button type="submit" class="btn btn-black">Search by Employee</button>
                 </form>
             </div>
         </div>
