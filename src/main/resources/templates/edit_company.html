@@ -89,7 +89,7 @@
 <body>
     <div class="form-container">
         <h1>Edit Company</h1>
-        <form th:action="@{/companies/{id}(id=${company.id})}" th:object="${company}" method="post">
+        <form th:action="@{/companies/edit/{id}(id=${company.id})}" th:object="${company}" method="post">
             <label for="name">Company Name:</label>
             <input type="text" id="name" name="name" th:field="*{name}" />
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></span>
