@@ -2,8 +2,9 @@ package com.example.companymanagement.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Company {
@@ -19,6 +20,12 @@ public class Company {
 
     @NotBlank(message = "Employee name cannot be empty")
     private String employee;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CompanyFile> files = new ArrayList<>();
 
     // Default constructor
     public Company() {
@@ -62,5 +69,21 @@ public class Company {
 
     public void setEmployee(String employee) {
         this.employee = employee;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<CompanyFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<CompanyFile> files) {
+        this.files = files;
     }
 }
