@@ -162,6 +162,37 @@
             background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
             color: #fff;
         }
+        .input-group.pill-group {
+            display: flex;
+            border: 2px solid #a259ff;
+            border-radius: 2rem;
+            overflow: hidden;
+            background: #23272b;
+            box-shadow: 0 2px 8px 0 rgba(130, 90, 255, 0.05);
+        }
+        .input-group.pill-group .form-control {
+            border: none;
+            border-radius: 0;
+            background: #23272b;
+            color: #fff;
+            box-shadow: none;
+        }
+        .input-group.pill-group .form-control:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .input-group.pill-group .btn-black {
+            border: none;
+            border-radius: 0;
+            background: #181a1b;
+            color: #fff;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .input-group.pill-group .btn-black:hover {
+            background: #23272b;
+            color: #a259ff;
+        }
     </style>
 </head>
 <body>
@@ -197,13 +228,13 @@
 
         <div class="row search-row justify-content-center g-2 mb-3">
             <div class="col-12 col-md-4 mb-2 mb-md-0">
-                <div class="input-group">
+                <div class="input-group pill-group">
                     <input type="text" id="company-id" class="form-control" placeholder="Enter Company ID">
                     <button onclick="findCompanyById()" class="btn btn-black">Find Company</button>
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <form th:action="@{/companies/search}" method="get" class="input-group">
+                <form th:action="@{/companies/search}" method="get" class="input-group pill-group">
                     <input type="text" name="employee" class="form-control" placeholder="Enter Employee Name" required>
                     <button type="submit" class="btn btn-black">Search by Employee</button>
                 </form>
