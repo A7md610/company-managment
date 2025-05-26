@@ -4,6 +4,7 @@ const urlsToCache = [
     '/css/bootstrap.min.css',
     '/js/bootstrap.bundle.min.js',
     '/companies/admin',
+    '/companies/new',
     '/companies/edit'
 ];
 
