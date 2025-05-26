@@ -9,17 +9,26 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
         body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #181a1b !important;
+            color: #f1f1f1;
             background-color: #f8f9fa;
+            color: #212529;
             -webkit-tap-highlight-color: transparent;
         }
         .form-container {
+            background: rgba(35, 39, 43, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(130, 90, 255, 0.15);
+            border: 1px solid rgba(130, 90, 255, 0.18);
+            padding: 40px 32px;
+            margin-top: 60px;
             max-width: 500px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin: 40px auto;
+            transition: background 0.3s, box-shadow 0.3s;
         }
         @media (max-width: 576px) {
             .form-container {
@@ -32,12 +41,21 @@
             }
         }
         .form-control {
-            font-size: 16px; /* Prevents zoom on iOS */
-            padding: 0.75rem;
+            background: #23272b;
+            color: #f1f1f1;
+            border: 1.5px solid #6c47ff;
+            border-radius: 10px;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus {
+            border-color: #a259ff;
+            box-shadow: 0 0 0 2px #a259ff44;
+            background: #23272b;
+            color: #fff;
         }
         .form-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            color: #bfc9d1;
+            font-weight: 600;
         }
         .btn {
             touch-action: manipulation;
@@ -70,6 +88,153 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #181a1b;
+            color: #f1f1f1;
+        }
+        .dark-mode .form-container {
+            background-color: #23272b;
+            color: #f1f1f1;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+        .dark-mode .form-label,
+        .dark-mode .form-control {
+            color: #f1f1f1;
+            background-color: #23272b;
+            border-color: #444;
+        }
+        .dark-mode .form-control:focus {
+            background-color: #23272b;
+            color: #fff;
+        }
+        .dark-mode .btn-success {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        .dark-mode .btn-secondary {
+            background-color: #444;
+            border-color: #444;
+        }
+        .dark-mode .alert-success {
+            background-color: #1e4620;
+            color: #d1e7dd;
+        }
+        .dark-mode .alert-danger {
+            background-color: #58151c;
+            color: #f8d7da;
+        }
+        .dark-mode .btn-close {
+            filter: invert(1);
+        }
+        .dark-mode .form-control::placeholder {
+            color: #bbb;
+        }
+        .dark-mode .form-control:disabled, .dark-mode .form-control[readonly] {
+            background-color: #23272b;
+            color: #aaa;
+        }
+        .dark-mode .btn {
+            color: #fff;
+        }
+        .dark-mode .btn-success:hover {
+            background-color: #157347;
+        }
+        .dark-mode .btn-secondary:hover {
+            background-color: #333;
+        }
+        .dark-mode .form-container {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.7);
+        }
+        .dark-mode .form-label {
+            color: #f1f1f1;
+        }
+        .dark-mode .form-control {
+            background-color: #23272b;
+            color: #f1f1f1;
+            border-color: #444;
+        }
+        .dark-mode .form-control:focus {
+            background-color: #23272b;
+            color: #fff;
+        }
+        .dark-mode .form-control::placeholder {
+            color: #bbb;
+        }
+        .dark-mode .form-control:disabled, .dark-mode .form-control[readonly] {
+            background-color: #23272b;
+            color: #aaa;
+        }
+        .btn-success {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px 0 rgba(130, 90, 255, 0.15);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-success:hover {
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #23272b;
+            color: #bfc9d1;
+            border-radius: 12px;
+            border: 1px solid #444;
+        }
+        .btn-secondary:hover {
+            background: #2d2f36;
+            color: #fff;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        .alert-success {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            color: #fff;
+            border: none;
+        }
+        .alert-danger {
+            background: #58151c;
+            color: #f8d7da;
+            border: none;
+        }
+        .text-primary {
+            color: #a259ff !important;
+            font-weight: 700;
+        }
+        #darkModeToggle {
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-weight: 600;
+            background: #23272b;
+            color: #f1f1f1;
+            border: 1px solid #444;
+            transition: background 0.2s, color 0.2s;
+        }
+        #darkModeToggle:hover {
+            background: #4f8cff;
+            color: #fff;
+        }
+        .dark-mode .text-primary {
+            color: #fff !important;
+        }
+        .gradient-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            color: #8f5cff;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            text-fill-color: initial;
+            text-shadow: 0 4px 18px #8f5cff88, 0 1px 1px #0006;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -84,7 +249,7 @@
 
     <div class="container">
         <div class="form-container">
-            <h2 class="text-center text-primary mb-4">Edit Company</h2>
+            <div class="gradient-title">Edit Company</div>
             <!-- Success/Error Notifications -->
             <div th:if="${param.success}" class="alert alert-success alert-dismissible fade show" role="alert">
                 <span th:text="${param.success}">Company updated!</span>

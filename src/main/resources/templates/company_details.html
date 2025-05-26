@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Company Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #181a1b;
+            color: #f1f1f1;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .form-label {
+            color: #bfc9d1;
+            font-weight: 600;
+        }
+        .form-control {
+            background: #23272b;
+            color: #f1f1f1;
+            border: 1.5px solid #6c47ff;
+            border-radius: 10px;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus {
+            border-color: #a259ff;
+            box-shadow: 0 0 0 2px #a259ff44;
+            background: #23272b;
+            color: #fff;
+        }
+        .card {
+            background: rgba(35, 39, 43, 0.95);
+            color: #f1f1f1;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(130, 90, 255, 0.15);
+            border: 1px solid rgba(130, 90, 255, 0.18);
+            margin-bottom: 20px;
+        }
+        .btn-purple {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-purple:hover {
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
+        }
+        .file-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .file-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .file-card .file-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        .file-card .file-actions button {
+            background: rgba(35, 39, 43, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: background 0.2s;
+        }
+        .file-card .file-actions button:hover {
+            background: rgba(35, 39, 43, 1);
+        }
+        .file-card .file-info {
+            padding: 15px;
+        }
+        .file-card .file-info h5 {
+            margin: 0;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pdf-placeholder {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #23272b;
+            color: #a259ff;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="gradient-title mb-0" th:text="${company.name}">Company Name</h1>
+                <a href="/companies" class="btn btn-purple">Back to Companies</a>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title">Company Description</h5>
+                        <button class="btn btn-purple" onclick="toggleEditMode()">Edit</button>
+                    </div>
+                    <div id="viewMode">
+                        <p class="card-text" th:text="${company.description ?: 'No description available'}">Description</p>
+                    </div>
+                    <div id="editMode" style="display: none;">
+                        <textarea class="form-control mb-3" id="description" rows="4" th:text="${company.description}"></textarea>
+                        <button class="btn btn-purple" onclick="updateDescription()">Save Description</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title">Company Files</h5>
+                        <div>
+                            <input type="file" id="fileInput" style="display: none;" accept="image/*,.pdf" onchange="uploadFile()">
+                            <button class="btn btn-purple" onclick="document.getElementById('fileInput').click()">Upload File</button>
+                        </div>
+                    </div>
+                    <div class="row" id="filesContainer">
+                        <div th:each="file : ${company.files}" class="col-md-4 mb-4">
+                            <div class="file-card">
+                                <div th:if="${file.type.startsWith('image/')}">
+                                    <img th:src="@{'/api/files/' + ${file.id} + '/preview'}" th:alt="${file.name}">
+                                </div>
+                                <div th:unless="${file.type.startsWith('image/')}" class="pdf-placeholder">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="file-actions">
+                                    <button onclick="downloadFile(this)" th:data-file-id="${file.id}" th:data-file-name="${file.name}">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button onclick="deleteFile(this)" th:data-file-id="${file.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="file-info">
+                                    <h5 th:text="${file.name}">File Name</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <script>
+        function toggleEditMode() {
+            const viewMode = document.getElementById('viewMode');
+            const editMode = document.getElementById('editMode');
+            if (viewMode.style.display === 'none') {
+                viewMode.style.display = 'block';
+                editMode.style.display = 'none';
+            } else {
+                viewMode.style.display = 'none';
+                editMode.style.display = 'block';
+            }
+        }
+
+        function updateDescription() {
+            const description = document.getElementById('description').value;
+            fetch(`/api/companies/${companyId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ description }),
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to update description');
+                toggleEditMode();
+                document.querySelector('#viewMode p').textContent = description;
+            })
+            .catch(error => {
+                alert('Error updating description: ' + error.message);
+            });
+        }
+
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('companyId', companyId);
+
+            fetch('/api/files/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to upload file');
+                return response.json();
+            })
+            .then(file => {
+                const filesContainer = document.getElementById('filesContainer');
+                const fileCard = createFileCard(file);
+                filesContainer.appendChild(fileCard);
+                fileInput.value = '';
+            })
+            .catch(error => {
+                alert('Error uploading file: ' + error.message);
+            });
+        }
+
+        function createFileCard(file) {
+            const col = document.createElement('div');
+            col.className = 'col-md-4 mb-4';
+            col.innerHTML = `
+                <div class="file-card">
+                    ${file.type.startsWith('image/') 
+                        ? `<img src="/api/files/${file.id}/preview" alt="${file.name}">`
+                        : `<div class="pdf-placeholder"><i class="fas fa-file-pdf"></i></div>`
+                    }
+                    <div class="file-actions">
+                        <button onclick="downloadFile(this)" data-file-id="${file.id}" data-file-name="${file.name}">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button onclick="deleteFile(this)" data-file-id="${file.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="file-info">
+                        <h5>${file.name}</h5>
+                    </div>
+                </div>
+            `;
+            return col;
+        }
+
+        function downloadFile(button) {
+            const fileId = button.dataset.fileId;
+            const fileName = button.dataset.fileName;
+            window.location.href = `/api/files/${fileId}/download`;
+        }
+
+        function deleteFile(button) {
+            if (!confirm('Are you sure you want to delete this file?')) return;
+
+            const fileId = button.dataset.fileId;
+            fetch(`/api/files/${fileId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to delete file');
+                button.closest('.col-md-4').remove();
+            })
+            .catch(error => {
+                alert('Error deleting file: ' + error.message);
+            });
+        }
+
+        // Get company ID from the URL
+        const companyId = window.location.pathname.split('/').pop();
+    </script>
+</body>
+</html> 
