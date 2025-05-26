@@ -131,6 +131,4 @@ public class CompanyViewController {
                 .body(new InputStreamResource(in));
     }
 }
-=======
-}
->>>>>>> 5fea0401bd9d82286b63d86b2c9d04cd1522cba4
+
