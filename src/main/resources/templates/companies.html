@@ -193,11 +193,24 @@
             background: #23272b;
             color: #a259ff;
         }
+        .gradient-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 2px 16px #a259ff44, 0 1px 1px #0008;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
     <div class="container py-4">
-        <h1 class="text-center text-primary mb-4">Company Management</h1>
+        <div class="gradient-title">Company Management</div>
 
         <!-- Success/Error Notifications -->
         <div th:if="${param.success}" class="alert alert-success alert-dismissible fade show" role="alert">
