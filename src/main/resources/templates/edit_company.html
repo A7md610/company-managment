@@ -20,18 +20,15 @@
             -webkit-tap-highlight-color: transparent;
         }
         .form-container {
-            background: rgba(40, 44, 52, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(35, 39, 43, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(130, 90, 255, 0.15);
+            border: 1px solid rgba(130, 90, 255, 0.18);
             padding: 40px 32px;
             margin-top: 60px;
-            transition: background 0.3s, box-shadow 0.3s;
             max-width: 500px;
-            margin: 20px auto;
-            background-color: #fff;
+            margin: 40px auto;
+            transition: background 0.3s, box-shadow 0.3s;
         }
         @media (max-width: 576px) {
             .form-container {
@@ -44,18 +41,21 @@
             }
         }
         .form-control {
-            background: rgba(30, 34, 40, 0.8);
-            border: 1.5px solid #333;
+            background: #23272b;
             color: #f1f1f1;
-            border-radius: 12px;
+            border: 1.5px solid #6c47ff;
+            border-radius: 10px;
             transition: border 0.2s, box-shadow 0.2s;
-            font-size: 16px; /* Prevents zoom on iOS */
-            padding: 0.75rem;
+        }
+        .form-control:focus {
+            border-color: #a259ff;
+            box-shadow: 0 0 0 2px #a259ff44;
+            background: #23272b;
+            color: #fff;
         }
         .form-label {
-            font-weight: 600;
             color: #bfc9d1;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
         .btn {
             touch-action: manipulation;
@@ -166,20 +166,44 @@
             color: #aaa;
         }
         .btn-success {
-            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
             border: none;
-            color: #181a1b;
+            color: #fff;
             font-weight: 600;
             border-radius: 12px;
-            box-shadow: 0 2px 8px 0 rgba(67, 233, 123, 0.15);
+            box-shadow: 0 2px 8px 0 rgba(130, 90, 255, 0.15);
             transition: background 0.2s, color 0.2s;
         }
         .btn-success:hover {
-            background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
-            color: #181a1b;
+            background: linear-gradient(90deg, #6c47ff 0%, #a259ff 100%);
+            color: #fff;
         }
         .btn-secondary {
+            background: #23272b;
+            color: #bfc9d1;
             border-radius: 12px;
+            border: 1px solid #444;
+        }
+        .btn-secondary:hover {
+            background: #2d2f36;
+            color: #fff;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        .alert-success {
+            background: linear-gradient(90deg, #a259ff 0%, #6c47ff 100%);
+            color: #fff;
+            border: none;
+        }
+        .alert-danger {
+            background: #58151c;
+            color: #f8d7da;
+            border: none;
+        }
+        .text-primary {
+            color: #a259ff !important;
+            font-weight: 700;
         }
         #darkModeToggle {
             border-radius: 20px;
