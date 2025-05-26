@@ -99,7 +99,6 @@ public class CompanyViewController {
         model.addAttribute("companies", companyService.findByEmployee(employee));
         return "companies";
     }
-<<<<<<< HEAD
 
     // Upload Excel file
     @PostMapping("/upload")
