@@ -235,9 +235,6 @@
 
     <div class="container">
         <div class="form-container">
-            <div class="d-flex justify-content-end mb-2">
-                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm">🌙 Dark Mode</button>
-            </div>
             <h2 class="text-center text-primary mb-4">Edit Company</h2>
             <!-- Success/Error Notifications -->
             <div th:if="${param.success}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -292,33 +289,6 @@
         // Form submission handling
         document.getElementById('editCompanyForm').addEventListener('submit', function(e) {
             document.querySelector('.loading').style.display = 'block';
-        });
-    </script>
-
-    <script>
-        // Dark mode toggle logic
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        function setDarkMode(on) {
-            if (on) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'on');
-                darkModeToggle.textContent = '☀️ Light Mode';
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'off');
-                darkModeToggle.textContent = '🌙 Dark Mode';
-            }
-        }
-        // Load preference
-        const darkPref = localStorage.getItem('darkMode');
-        if (darkPref === 'on' || (darkPref === null && prefersDark)) {
-            setDarkMode(true);
-        } else {
-            setDarkMode(false);
-        }
-        darkModeToggle.addEventListener('click', function() {
-            setDarkMode(!document.body.classList.contains('dark-mode'));
         });
     </script>
 </body>
