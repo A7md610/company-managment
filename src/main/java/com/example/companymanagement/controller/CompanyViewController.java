@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -43,13 +44,15 @@ public class CompanyViewController {
     // Process the new company creation
     @PostMapping("/new")
     public String saveCompany(@Valid @ModelAttribute("company") Company company,
-                              BindingResult result, Model model) {
+                              BindingResult result, Model model,
+                              RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "create_company"; // Stay on the form page
         }
 
         companyService.saveCompany(company); // Save the company
-        return "redirect:/companies/new?success=true"; // Redirect to avoid duplicate submissions
+        redirectAttributes.addFlashAttribute("successMessage", "Company added successfully!");
+        return "redirect:/companies/new"; // Redirect without query string
     }
 
     // List all companies (Admin page)
